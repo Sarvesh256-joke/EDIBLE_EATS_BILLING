@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap");
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+body {
+    font-family: "Josefin Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+
+
+header {
+    background-color:#242222;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    position: relative; 
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.22);
+  }
+  
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  h1 {
+    margin: 0; /* Remove default margin */
+    margin-left: 43rem;
+    margin-top: 2rem;
+  }
+  
+  .home-button {
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none; 
+    padding: 10px 20px; 
+    border: 1px solid transparent; 
+    border-radius: 5px; 
+    transition: text-decoration 0.3 ease; 
+  }
+  
+  .home-button:hover {
+    text-decoration: underline;
+    text-decoration-color: #d5d5d5;
+  }
+  
+  .home-button i {
+    margin-right: 5px;
+  }
+  .contact-form {
+   
+    padding: 2rem 0;
+    
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  textarea {
+    resize: vertical;
+  }
+  
+  button {
+    padding: 0.5rem 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #950ca1;
+  }
+  
+  footer {
+    background-color: #333;
+    color: #ffffff;
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 5rem;
+
+  }
+  

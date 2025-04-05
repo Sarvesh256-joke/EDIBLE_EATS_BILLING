@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Lover</title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/menu.css">
+  <!-- JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+  <header>
+    <div class="menu">
+      <nav>
+        <label class="logo">MENU</label>
+        <ul>
+          <li><a href="home.html" class="active">Home</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section id="order-list">
+      <h2>Order(s)</h2>
+      <table id="order-tbl">
+      </table>
+      <footer>
+        <button id="export" onclick="exportPDF()">Export PDF</button>
+        <span id="totalAmount"></span>
+      </footer>
+    </section>
+    <section id="menu">
+      <h2>Menu</h2>
+    </section>
+  </main>
+
+  <!-- JavaScript -->
+  <script>
+    const menu_container = document.getElementById('menu');
+    const order_tbl = document.getElementById('order-tbl');
+    const menu = [
+  {
+    name: "Chicken Fried Rice",
+    price: 250
+  },
+  {
+    name: "Chicken Manchurian",
+    price: 250
+  },
+  {
+    name: "Chicken wings",
+    price: 250
+  },
+  {
+    name: "Chicken Noodles",
+    price: 200
+  },
+  {
+    name: "Veg Noodles",
+    price: 150
+  },
+  {
+    name: "Veg Manchurian",
+    price: 250
+  },
+  {
+    name: "Chilli chicken",
+    price: 250
+  },
+  {
+    name: "Appolo Fish",
+    price: 250
+  },
+  {
+    name: "Prawns Fry",
+    price: 300
+  },
+  {
+    name: "Chicken Pizza(Large)",
+    price: 400
+  },
+  {
+    name: "Chicken Burger ",
+    price: 300
+  },
+  {
+    name: "French Fries",
+    price: 100
+  },
+  {
+    name: "Shawarma",
+    price: 200
+  }
+];
+
+
+    var order_list = []; // Create empty order_list array
+
+    function updateOrderList() {
+      let str = "";
+      var totalAmount = 0; // Variable to store total amount
+
+      if (order_list.length > 0) {
+        str += '<tr>';
+        str += '<th>#</th>';
+        str += '<th>Name</th>';
+        str += '<th>Quantity</th>';
+        str += '<th>Action</th>';
+        str += '</tr>';
+
+        order_list.forEach((item, index) => {
+          var itemPrice = menu[item.id].price * item.quantity; // Calculate item price
+          totalAmount += itemPrice; // Add item price to total amount
+
+          str += '<tr>';
+          str += '<td>' + (index + 1) + '</td>';
+          str += '<td>' + menu[item.id].name + '</td>';
+          str += '<td>' + item.quantity + '</td>';
+          str += '<td><button class="del-btn" onclick="deleteItem(' + index + ')">Delete</button></td>'; // Here's the delete button HTML
+          str += '</tr>';
+        });
+
+        order_tbl.innerHTML = str;
+        document.getElementById('totalAmount').textContent = 'Total Amount: ' + totalAmount;
+      } else {
+        str += '<tr>';
+        str += '<td colspan="4" style="text-align: center">Your order list is empty</td>';
+        str += '</tr>';
+        order_tbl.innerHTML = str;
+        document.getElementById('totalAmount').textContent = '';
+      }
+    }
+
+    function addItem(id) {
+      let qty = document.getElementsByClassName('qty')[id];
+      let qty_val = Number(qty.value); // Cast to Integer
+      
+      // If already exist then increase qty
+      for (let i = 0; i < order_list.length; i++) {
+        if (order_list[i].id == id) {
+          order_list[i].quantity += qty_val;
+          updateOrderList();
+          return;
+        }
+      }
+
+      // If not add new item to the array
+      order_list.push({id: id, quantity: qty_val});
+      updateOrderList();
+    }
+
+    function deleteItem(id) {
+      order_list.splice(id, 1); // Remove 1 item at 'id' position
+      updateOrderList();
+    }
+
+    function exportPDF() {
+  try {
+    const orderTable = document.getElementById('order-tbl');
+    const totalAmount = document.getElementById('totalAmount').textContent;
+    const gstAmount = calculateGST();
+    const totalAmountWithGST = calculateTotalAmountWithGST();
+
+    // Create a new div element to contain the text and table data
+    const contentDiv = document.createElement('div');
+    contentDiv.innerHTML = `
+      <h1>Thank you for ordering from Quick Bite</h1>
+      <h2>Order Summary</h2>
+      ${orderTable.outerHTML}
+      <p>Total: ${totalAmount}</p>
+      <p>GST (18%): ${gstAmount}</p>
+      <p>Total Amount (including GST): ${totalAmountWithGST}</p>
+    `;
+
+    // Convert the contentDiv to PDF using html2pdf library
+    html2pdf().from(contentDiv).save();
+  } catch (error) {
+    console.error('Error exporting PDF:', error);
+  }
+}
+
+
+function calculateGST() {
+  const totalAmount = parseFloat(document.getElementById('totalAmount').textContent.split(': ')[1]);
+  const gst = (totalAmount * 0.18).toFixed(2);
+  return gst;
+}
+
+function calculateTotalAmountWithGST() {
+  const totalAmount = parseFloat(document.getElementById('totalAmount').textContent.split(': ')[1]);
+  const gst = calculateGST();
+  const totalAmountWithGST = totalAmount + parseFloat(gst);
+  return totalAmountWithGST.toFixed(2);
+}
+
+
+
+    // Initialize
+    function initApp() {
+      for (let i = 0; i < menu.length; i++) {
+        let str = '<div class="menu-item">';
+        str += '<p class="food-name">' + menu[i].name + '</p>';
+        str += '<p class="price">' + (menu[i].price == 0 ? 'Free' : menu[i].price) + '</p>';
+        str += '<input class="qty" type="number" name="qty" value="1" min="1" max="100" >';
+        str += '<button class="add-btn" type="button" value="' + i + '" onclick="addItem(' + i +')">ADD</button>';
+        str += '</div>';
+        menu_container.insertAdjacentHTML('beforeend', str);
+      }
+      updateOrderList();
+    }
+
+    initApp();
+  </script>
+</body>
+</html>

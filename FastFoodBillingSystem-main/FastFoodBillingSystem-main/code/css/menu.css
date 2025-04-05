@@ -1,0 +1,200 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap");
+:root {
+  --clr-primary: #fe5722;
+  --clr-secondary: #272d36;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  *::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: rgba(0,0,0,.1);
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background: #bbb;
+    border-radius: 9em;
+  }
+  
+  *::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+  }
+  
+  body {
+    margin: 0;
+    background: #eee url("http://source.unsplash.com/U9-D7wwurT8/1080x1920") 50% 35%/cover no-repeat padding-box padding-box local;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 14px;
+    line-height: 21px;
+    margin-top: 90px;
+  }
+
+  nav {
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    background: #fff5f2;
+    box-shadow: 0 1px 1px -1px rgba(0, 0, 0, 0.22);
+    z-index: 22;
+  }
+  nav label{
+    margin-left: 43rem;
+  }
+  
+  label.logo {
+    font-size: 35px;
+    line-height: 80px;
+    padding: 0 30px;
+    font-weight: 700;
+  }
+  
+  nav ul {
+    float: right;
+    margin-right: 20px;
+  }
+  
+  nav ul li {
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+  }
+  
+  nav ul li a {
+    font-size: 18px;
+    padding: 7px 13px;
+    text-decoration: none;
+    color: var(--clr-secondary);
+  }
+  
+  .menu a.active,
+  .menu a:hover {
+    border-bottom: 2px solid var(--clr-primary);
+    transition: 0.3s;
+  }
+ 
+  
+  h2 {
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 37px;
+    line-height: 42px;
+    margin-top: 21px;
+    margin-bottom: 21px;
+    
+  }
+  
+  main {
+    display: flex;
+    margin: 21px auto 0 auto;
+    max-width: 1024px;
+    max-height: calc(100vh - 126px);
+    flex-direction: row;
+    padding-top: 30px;
+  }
+  
+  section {
+    margin: 21px;
+    padding: 0 21px 10px 21px;
+    width: calc(50% - 2px);
+    background: rgba(255,255,255,.7);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow-y: auto;
+  }
+  
+  #order-list {
+    display: flex;
+    flex-direction: column;
+    margin-right: 0;
+  }
+  
+  table {
+    margin-bottom: 21px;
+    width: 100%;
+    border: none;
+    padding-top: 20px;
+  }
+  
+  table, th, td {
+    border-collapse: collapse;
+  }
+  
+  tr:not(:first-child):not(:last-child) {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th, td {
+    padding: 4px 6px;
+    text-align: left;
+  }
+  
+  th {
+    background: #ffbe76;
+    color: #fff;
+  }
+  
+  .menu-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .menu-item:last-child {
+    border-bottom: none;
+  }
+  
+  .menu-item h4, .menu-item p {
+    margin: 8px;
+  }
+  
+  .menu-item .price {
+    margin-left: auto;
+  }
+  
+  .qty {
+    margin-right: 8px;
+    padding: 2px 4px;
+    width: 40px;
+  }
+  
+  .add-btn {
+    padding: 6px 10px;
+    background: #6ab04c;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .del-btn {
+    padding: 6px 10px;
+    background: red;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+  
+  .del-btn i {
+    margin-right: 5px; /* Add space between icon and text, adjust as needed */
+  }
+  
+  
+  .del-btn:hover { opacity: .75 }
+  
+  
+  #export {
+    margin-top: auto;
+    padding: 3px 5px;
+    background: #eee;
+    border: 1px solid #ddd;
+    align-self: flex-end;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  
